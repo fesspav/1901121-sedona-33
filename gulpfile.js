@@ -7,13 +7,11 @@ const render = require('posthtml-render');
 const chalk = require('chalk');
 const fetch = require('node-fetch');
 const { HtmlValidate } = require('html-validate');
-const gulpIf = require('gulp-if');
 
-let firstRun = true;
 const validateHtml = new HtmlValidate();
 const SeverityLevel = {
-	error: 2,
-	info: 1
+  error: 2,
+  info: 1
 };
 const Severity = {
   1: {
@@ -25,6 +23,7 @@ const Severity = {
     title: 'ERROR'
   }
 };
+const DEST = 'build';
 const W3C_TIMEOUT = 1000;
 const isDev = process.env.NODE_ENV === 'development';
 const getPage = (tree) => tree.options.from.replace(/^.*source(\\+|\/+)(.*)\.html$/, '$2');
@@ -94,14 +93,14 @@ const buildHTML = () => src(['source/**/*.html', '!source/**/_*.html'])
           });
         });
       } if (output) {
-				console.log(output);
-			}
+        console.log(output);
+      }
 
       return tree;
     })()
   ]))
   .pipe(require('gulp-html-beautify')())
-  .pipe(dest('.'));
+  .pipe(dest(DEST));
 
 const buildCSS = () => src(['source/**/*.css', '!source/**/_*.css'])
   .pipe(require('gulp-postcss')([
@@ -113,9 +112,9 @@ const buildCSS = () => src(['source/**/*.css', '!source/**/_*.css'])
       throwError: false
     })
   ]))
-  .pipe(dest('.'));
+  .pipe(dest(DEST));
 
-const testBuildedCSS = () => src(['**/*.css', '!source/**/*.css', '!node_modules/**/*.css'])
+const testBuildedCSS = () => src(['build/**/*.css'])
   .pipe(require('gulp-postcss')([
     require('stylelint')({ fix: true }),
     require('postcss-reporter')({
@@ -124,7 +123,7 @@ const testBuildedCSS = () => src(['**/*.css', '!source/**/*.css', '!node_modules
     })
   ]));
 
-const optimizeImages = () => src('source/**/*.{svg,png,jpg}')
+const optimizeImages = () => src('source/images/**/*.{svg,png,jpg}')
   .pipe(imagemin([
     imagemin.svgo({
       plugins: [
@@ -169,27 +168,36 @@ const optimizeImages = () => src('source/**/*.{svg,png,jpg}')
     imagemin.mozjpeg({ quality: 75, progressive: true }),
     imagemin.optipng()
   ]))
-  .pipe(gulpIf(firstRun, dest('source')))
-  .pipe(dest('.'));
+  .pipe(dest(`${DEST}/images`));
+
+const copyPP = () => src('source/pixelperfect/**/*')
+  .pipe(dest(`${DEST}/pixelperfect`));
+
+const copyFonts = () => src('source/fonts/**/*')
+  .pipe(dest(`${DEST}/fonts`));
 
 const reload = (done) => {
   server.reload();
   done();
 };
 
-const startServer = () => {
-  firstRun = false;
+const clearDest = () => require('del')(DEST);
 
+const startServer = () => {
   server.init({
     cors: true,
-    server: '.',
+    server: DEST,
     ui: false
   });
 
   watch('source/**/*.{html,svg}', series(buildHTML, reload));
   watch('source/**/*.css', series(buildCSS, testBuildedCSS, reload));
-  watch('source/**/*.{svg,png,jpg}', series(optimizeImages, reload));
+  watch('source/images/**/*.{svg,png,jpg}', series(optimizeImages, reload));
+  watch('source/pixelperfect/**/*', series(copyPP, reload));
+  watch('source/fonts/**/*', series(copyFonts, reload));
 };
 
 exports.test = testBuildedCSS;
-exports.default = series(parallel(buildHTML, buildCSS, optimizeImages), testBuildedCSS, startServer);
+const build = series(clearDest, parallel(buildHTML, buildCSS, optimizeImages, copyFonts));
+exports.build = build;
+exports.default = series(clearDest, build, copyPP, startServer);

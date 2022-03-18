@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=development gulp",
-    "test": "cross-env NODE_ENV=development gulp test"
+    "test": "cross-env NODE_ENV=development gulp test",
+    "build": "cross-env NODE_ENV=production gulp build"
   },
   "browserslist": [
     "last 1 version",
@@ -15,6 +16,7 @@
     "browser-sync": "2.27.7",
     "chalk": "4.1.2",
     "cross-env": "7.0.3",
+    "del": "6.0.0",
     "gulp": "4.0.2",
     "gulp-html-beautify": "1.0.1",
     "gulp-if": "3.0.0",

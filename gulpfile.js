@@ -28,7 +28,12 @@ const W3C_TIMEOUT = 1000;
 const isDev = process.env.NODE_ENV === 'development';
 const getPage = (tree) => tree.options.from.replace(/^.*source(\\+|\/+)(.*)\.html$/, '$2');
 
-const buildHTML = () => src(['source/**/*.html', '!source/**/_*.html'])
+const htmlSources = ['source/**/*.html', '!source/**/_*.html'];
+if (!isDev) {
+  htmlSources.push('!source/modal.html');
+}
+
+const buildHTML = () => src(htmlSources)
   .pipe(require('gulp-posthtml')([
     (() => (tree) => {
       nunjucks.configure('source', { autoescape: false });

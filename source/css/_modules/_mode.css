@@ -13,6 +13,7 @@
   width: 44px;
   border: 2px solid #e5e5e5;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .mode-item:hover {
@@ -21,6 +22,7 @@
 
 .mode-item-kind:checked + .mode-item {
   border-color: currentColor;
+  cursor: default;
 }
 
 .mode-item-kind:focus + .mode-item {

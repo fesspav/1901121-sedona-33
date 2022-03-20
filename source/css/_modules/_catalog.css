@@ -48,6 +48,7 @@
   position: relative;
   padding-left: 40px;
   line-height: 23px;
+  display: block;
 }
 
 .control-input:hover {
@@ -73,6 +74,7 @@
   left: 0;
   top: 0;
   content: "";
+  cursor: pointer;
 }
 
 .control-input:focus-visible + .control::before,

@@ -70,6 +70,7 @@
   border-top-left-radius: 0;
   background-color: #83b3d3;
   min-width: 200px;
+  cursor: pointer;
 }
 
 .button-subscribe:hover {

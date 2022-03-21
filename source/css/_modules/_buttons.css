@@ -12,7 +12,6 @@
   font-family: inherit;
   box-sizing: border-box;
   text-decoration: none;
-  outline-offset: 0;
   cursor: pointer;
 }
 
@@ -34,11 +33,9 @@
   background-color: #83b3d3;
   width: 620px;
   font-size: 20px;
-  margin: 30px auto 25px;
-  text-decoration: none;
+  margin: 30px auto;
   padding-top: 20px;
-  padding-bottom: 21px;
-  outline-offset: 0;
+  padding-bottom: 20px;
 }
 
 .button-load:hover {
@@ -51,7 +48,7 @@
 
 /* кнопка поиска гостиницы */
 .find-hotel-button {
-  padding: 13px 15px 11px;
+  padding: 14px 15px 10px;
   font-size: 20px;
   line-height: 36px;
   display: block;
@@ -82,7 +79,7 @@
 /* кнопки фильтра */
 .button-apply {
   background-color: #83b3d3;
-  padding: 12px 15px 15px;
+  padding: 12px 32px 16px;
   width: 100%;
 }
 
@@ -97,7 +94,7 @@
 .button-reset {
   background-color: transparent;
   font: inherit;
-  margin: 20px 0 0;
+  margin: 18px 0 0;
   padding: 0 10px;
   text-transform: capitalize;
   border: none;

@@ -117,6 +117,7 @@
   position: absolute;
   top: 0;
   width: 20px;
+  color: inherit;
 }
 
 .range-slider-origin:last-child {

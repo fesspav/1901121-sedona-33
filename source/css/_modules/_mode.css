@@ -11,34 +11,24 @@
   display: flex;
   height: 44px;
   width: 44px;
+  color: inherit;
   border: 2px solid #e5e5e5;
   border-radius: 4px;
-  cursor: pointer;
+  outline: none;
 }
 
-.mode-item:hover {
+.mode-item:hover,
+.mode-item:focus-visible {
   border-color: #83b3d3;
 }
 
-.mode-item-kind:checked + .mode-item {
+.mode-item:active,
+.mode-item-current {
   border-color: currentColor;
-  cursor: default;
-}
-
-.mode-item-kind:focus + .mode-item {
-  border-color: #83b3d3;
 }
 
 .mode-tile::after {
   mask-image: url("../images/tile.svg");
-}
-
-.mode-item::after {
-  background-color: currentColor;
-  content: "";
-  height: 20px;
-  width: 20px;
-  margin: auto;
 }
 
 .mode-slideshow::after {
@@ -47,4 +37,12 @@
 
 .mode-schedule::after {
   mask-image: url("../images/schedule.svg");
+}
+
+.mode-item::after {
+  background-color: currentColor;
+  content: "";
+  height: 20px;
+  width: 20px;
+  margin: auto;
 }

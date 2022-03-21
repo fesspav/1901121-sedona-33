@@ -2,18 +2,6 @@
   padding: 0 72px 141px;
 }
 
-.subscribe .section-title {
-  margin: 2px 0 46px;
-}
-
-.subscribe .section-description {
-  margin: 0 0 46px;
-}
-
-.subscribe-alter .section-title {
-  margin: 0 0 29px;
-}
-
 .subscribe-alter {
   background-color: #83b3d3;
   background-image: url("../images/background-email.jpg");
@@ -22,6 +10,14 @@
   color: #ffffff;
   padding-top: 93px;
   padding-bottom: 94px;
+}
+
+.subscribe:not(.subscribe-alter) .section-title {
+  margin: 2px 0 46px;
+}
+
+.subscribe-alter .section-description {
+  color: inherit;
 }
 
 .form-field {
@@ -39,7 +35,7 @@
 }
 
 .signup-subscribe {
-  padding: 19px 20px 16px;
+  padding: 15px 20px;
   border-radius: 10px 0 0 10px;
   border: 2px solid transparent;
   background-color: #f2f2f2;

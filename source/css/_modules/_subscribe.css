@@ -54,8 +54,9 @@
   box-sizing: border-box;
 }
 
-.signup-subscribe:invalid {
-  outline: 2px solid #ff5757;
+.signup-subscribe:not(:placeholder-shown):invalid,
+.subscribe-form-validable .signup-subscribe:invalid {
+  border-color: #ff5757;
 }
 
 .button-subscribe {

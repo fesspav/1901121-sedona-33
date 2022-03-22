@@ -41,7 +41,7 @@
   outline: 3px solid #756257;
 }
 
-.pagination-link:active {
+.pagination-link:active:not(.pagination-active) {
   color: rgba(255, 255, 255, 0.3);
 }
 

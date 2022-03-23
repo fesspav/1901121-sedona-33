@@ -31,6 +31,7 @@
   line-height: 26px;
   font-weight: 700;
   border-radius: 4px;
+  outline-offset: 0;
 }
 
 .pagination-link:hover:not(.pagination-active) {

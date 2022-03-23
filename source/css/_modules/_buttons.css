@@ -13,6 +13,7 @@
   box-sizing: border-box;
   text-decoration: none;
   cursor: pointer;
+  outline-offset: 0;
 }
 
 .button:hover {
